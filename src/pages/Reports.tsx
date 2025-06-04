@@ -1,11 +1,11 @@
 
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { AppInstallStatusTable } from "@/components/reports/AppInstallStatusTable";
 import { Search, Filter } from "lucide-react";
 
 const mockApplications = [
@@ -20,12 +20,10 @@ const mockApplications = [
 
 const Reports = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedApplication, setSelectedApplication] = useState<string>("");
-  const [showInstallStatus, setShowInstallStatus] = useState(false);
+  const navigate = useNavigate();
 
   const handleViewReport = (appId: string) => {
-    setSelectedApplication(appId);
-    setShowInstallStatus(true);
+    navigate(`/reports/app/${appId}`);
   };
 
   const filteredApplications = mockApplications.filter(app =>
@@ -34,8 +32,6 @@ const Reports = () => {
     app.platform.toLowerCase().includes(searchTerm.toLowerCase()) ||
     app.type.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
-  const selectedApp = mockApplications.find(app => app.id === selectedApplication);
 
   return (
     <AppLayout>
@@ -110,13 +106,6 @@ const Reports = () => {
               </div>
             </CardContent>
           </Card>
-
-          {showInstallStatus && selectedApp && (
-            <AppInstallStatusTable 
-              applicationId={selectedApplication}
-              applicationName={selectedApp.name}
-            />
-          )}
         </div>
       </div>
     </AppLayout>
