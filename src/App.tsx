@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import Devices from "./pages/Devices";
 import DeviceDetail from "./pages/DeviceDetail";
 import Policies from "./pages/Policies";
+import Reports from "./pages/Reports";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/devices" element={<Devices />} />
           <Route path="/devices/:deviceId" element={<DeviceDetail />} />
           <Route path="/policies" element={<Policies />} />
+          <Route path="/reports" element={<Reports />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
